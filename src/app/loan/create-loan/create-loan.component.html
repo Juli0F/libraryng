@@ -1,0 +1,36 @@
+<p-card>
+    <form [formGroup]="loanForm" (ngSubmit)="onSubmit()" class="p-fluid">
+      <div class="p-grid">
+        <div class="p-col-6">
+          <span class="p-float-label">
+            <input id="loanDate" type="date" pInputText formControlName="loanDate">
+            <label for="loanDate">Loan Date</label>
+          </span>
+        </div>
+        <br>
+        <div class="p-col-6">
+          <span class="p-float-label">
+            <input id="returnDate" type="date" pInputText formControlName="returnDate">
+            <label for="returnDate">Return Date</label>
+          </span>
+        </div>
+        <br>
+        <div class="p-col-6">
+          <span class="p-float-label">
+            <input id="totalDue" type="number" pInputText formControlName="totalDue">
+            <label for="totalDue">Total Due</label>
+          </span>
+        </div>
+        <br>
+        <div class="p-col-6">
+          <span class="p-float-label">
+            <input id="status" type="text" pInputText formControlName="status">
+            <label for="status">Status</label>
+          </span>
+        </div>
+      </div>
+      <br>
+      <button type="submit" pButton label="Submit" [disabled]="!loanForm.valid"></button>
+    </form>
+  </p-card>
+  

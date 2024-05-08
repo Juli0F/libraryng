@@ -1,0 +1,50 @@
+<div class="grid">
+    <div class="col-12">
+      <p-card>
+        <div class="grid">
+          <div class="col">
+            <button pButton type="button" label="Agregar Libro" icon="pi pi-plus" (click)="showDialog()"></button>
+          </div>
+          <div class="col">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" placeholder="Buscar Libros" (input)="onSearch($event)" />
+            </span>
+          </div>
+        </div>
+  
+        <p-table [value]="books" [paginator]="true" [rows]="10">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Código</th>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Editorial</th>
+              <th>Fecha de Publicación</th>
+              <th>Copias Disponibles</th>
+              <th>Acciones</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-book>
+            <tr>
+              <td>{{ book.code }}</td>
+              <td>{{ book.title }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.publisher }}</td>
+              <td>{{ book.publicationDate | date:'mediumDate' }}</td>
+              <td>{{ book.availableCopies }}</td>
+              <td>
+                <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success" (click)="showDialog(book)"></button>
+                <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteBook(book)"></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+  
+      <p-dialog header="Libro" [(visible)]="displayModal" [modal]="true" [style]="{width: '450px'}">
+        <app-create-book [bookToEdit]="editBook" (onClose)="closeModal()" (onCreated)="closeModalAndReloadList()"></app-create-book>
+      </p-dialog>
+    </div>
+  </div>
+  

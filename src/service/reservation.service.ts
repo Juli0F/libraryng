@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reservation } from 'src/models/models';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  private apiUrl = '/reservations';
+  apiUrl = environment.apiUrl +  '/reservations';
 
   constructor(private http: HttpClient) { }
 
@@ -25,5 +26,12 @@ export class ReservationService {
 
   updateReservationStatus(id: number, status: string): Observable<Reservation> {
     return this.http.patch<Reservation>(`${this.apiUrl}/${id}/status`, { status });
+  }
+
+  getAllReservations() {
+    return this.http.get<Reservation[]>(`${this.apiUrl}`);
+  }
+  deleteReservation(id:number){
+    return this.http.delete<Reservation>(`${this.apiUrl}/${id}`, {});
   }
 }

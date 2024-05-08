@@ -1,0 +1,46 @@
+<div class="grid">
+    <div class="col-12">
+      <p-card>
+        <div class="grid">
+          <div class="col">
+            <button pButton type="button" label="Crear Estudiante" icon="pi pi-plus" (click)="showDialog()"></button>
+          </div>
+          <div class="col">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" placeholder="Buscar Estudiantes" (input)="onSearch($event)" />
+            </span>
+          </div>
+        </div>
+  
+        <p-table [value]="students" [paginator]="true" [rows]="10">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Carnet</th>
+              <th>Nombre</th>
+              <th>Carrera</th>
+              <th>Status</th>
+              <th>Acciones</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-student>
+            <tr>
+              <td>{{ student.carnet }}</td>
+              <td>{{ student.name }}</td>
+              <td>{{ student.career }}</td>
+              <td>{{ student.status ? 'Activo' : 'Inactivo' }}</td>
+              <td>
+                <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success" (click)="showDialog(student)"></button>
+                <button pButton icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteStudent(student)"></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+  
+      <p-dialog header="Estudiante" [(visible)]="displayModal" [modal]="true" [style]="{width: '450px'}">
+        <app-create-student [studentToEdit]="editStudent" (onClose)="closeModal()" (onCreated)="loadStudents()"></app-create-student>
+      </p-dialog>
+    </div>
+  </div>
+  

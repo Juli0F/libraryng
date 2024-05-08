@@ -1,1 +1,29 @@
+<p-card>
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="carnet">Carnet</label>
+          <input id="carnet" type="text" pInputText formControlName="carnet">
+        </div>
+        <div class="p-field">
+          <label for="name">Nombre</label>
+          <input id="name" type="text" pInputText formControlName="name">
+        </div>
+        <div class="p-field">
+            <label for="birthDate">Fecha de Reserva</label>
+            <input type="date" pInputText formControlName="birthDate">
+          </div>
+
+        <div class="p-field">
+          <label for="career">Carrera</label>
+           <p-dropdown [options]="careers" optionLabel="name" formControlName="career" placeholder="Seleccione una carrera"></p-dropdown>
+        </div>
+        <div class="p-field-checkbox">
+          <p-checkbox label="Activo" formControlName="status"></p-checkbox>
+        </div>
+        <button type="submit" pButton label="Guardar" [disabled]="!studentForm.valid"></button>
+      </div>
+    </form>
+  </p-card>
+  <p-toast position="bottom-right"></p-toast>
   

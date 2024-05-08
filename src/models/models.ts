@@ -10,11 +10,18 @@ export class Book{
 }
 export class Student{
  carnet !: string;
- nombre !: string;
+ name !: string;
  status !: boolean;
  career !: Career;
  loans !: Loan[];
  reservations !: Reservation[]
+}
+export class StudentDto{
+  carnet !: string;
+  name !: string;
+  birthDate !: Date;
+  status !: boolean;
+  career !: string;
 }
 export class Career {
   code !: string;

@@ -1,0 +1,32 @@
+<p-card>
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="code">Código</label>
+          <input id="code" type="text" pInputText formControlName="code">
+        </div>
+        <div class="p-field">
+          <label for="title">Título</label>
+          <input id="title" type="text" pInputText formControlName="title">
+        </div>
+        <div class="p-field">
+          <label for="author">Autor</label>
+          <input id="author" type="text" pInputText formControlName="author">
+        </div>
+        <div class="p-field">
+          <label for="publisher">Editorial</label>
+          <input id="publisher" type="text" pInputText formControlName="publisher">
+        </div>
+        <div class="p-field">
+          <label for="publicationDate">Fecha de Publicación</label>
+          <input id="publicationDate" type="date" pInputText formControlName="publicationDate">
+        </div>
+        <div class="p-field">
+          <label for="availableCopies">Copias Disponibles</label>
+          <input id="availableCopies" type="number" pInputText formControlName="availableCopies">
+        </div>
+        <button type="submit" pButton label="Guardar" [disabled]="!bookForm.valid"></button>
+      </div>
+    </form>
+  </p-card>
+  <p-toast position="bottom-right"></p-toast>

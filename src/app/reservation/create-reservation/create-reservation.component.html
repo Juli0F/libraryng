@@ -1,0 +1,14 @@
+<p-card>
+    <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="p-fluid">
+      <div class="p-field">
+        <label for="reservationDate">Fecha de Reserva</label>
+        <input type="date" pInputText formControlName="reservationDate">
+      </div>
+      <div class="p-field">
+        <label for="status">Estado</label>
+        <input type="text" pInputText formControlName="status">
+      </div>
+      <button type="submit" pButton label="Guardar" [disabled]="!reservationForm.valid"></button>
+    </form>
+  </p-card>
+  

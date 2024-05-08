@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Career } from 'src/models/models';
 import { CareerService } from 'src/service/career.service';
 
@@ -20,7 +21,10 @@ export class CreateCareerComponent implements OnInit  {
     status: new FormControl(true)
   });
 
-  constructor(private careerService: CareerService){}
+  constructor(private careerService: CareerService,
+    private messageService: MessageService
+  ){}
+  
   ngOnInit(): void {
     this.careerForm.setValue({
       code: '',
@@ -57,12 +61,13 @@ export class CreateCareerComponent implements OnInit  {
   create(career:Career) {
     this.careerService.createCareer(career).subscribe({
       next: (data) => {
-        console.log(data);
         this.onCreated.emit(true);
         this.careerForm.reset();
+        this.messageService.add({severity:'success',summary:'success',detail:"Carrera almacenada correctamente"});
       },
       error: (err) => {
         console.log("error");
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error});
       }
 
     });
@@ -73,9 +78,10 @@ export class CreateCareerComponent implements OnInit  {
         console.log(data);
         this.onCreated.emit(true);
         this.careerForm.reset();
+        this.messageService.add({severity:'success',summary:'success',detail:"Carrera almacenada correctamente"});
       },
       error: (err) => {
-        console.log("error");
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error});
       }
     })
   }

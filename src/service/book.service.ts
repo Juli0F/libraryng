@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Book } from 'src/models/models';
+import { environment } from 'src/environments/environment.development';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private apiUrl = '/books';
+  private apiUrl = environment.apiUrl+ '/books';
 
   constructor(private http: HttpClient) { }
 
@@ -26,5 +27,8 @@ export class BookService {
 
   deleteBook(code: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${code}`);
+  }
+  getAllBooks(){
+    return this.http.get<Book[]>(`${this.apiUrl}/all`)
   }
 }

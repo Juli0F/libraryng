@@ -50,6 +50,11 @@ export class NavbarComponent implements OnInit{
           routerLink: ['loan'],
         },
         {
+          label: 'Gestion de reservaciones',
+          icon: 'pi pi-fw pi-plus',
+          routerLink: ['reservation'],
+        },
+        {
           label: 'Gestion de devoluciones',
           icon: 'pi pi-fw pi-plus',
           routerLink: ['return'],

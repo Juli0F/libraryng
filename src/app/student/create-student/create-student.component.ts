@@ -92,7 +92,7 @@ export class CreateStudentComponent implements OnInit {
     })
   }
 
-  edit(student:StudentDto){
+  edit(student:StudentDto){ 
     this.studentService.updateStudent(this.carnet,student).subscribe({
       next: data => {
         console.log(data);

@@ -35,9 +35,25 @@ export class Loan {
   status !: string;
   totalDue !: number;
 }
+export class LoanResponseDto{
+  id !: number;
+  name !: string;
+  loanDate !: Date;
+  returnDate !: Date;
+  status !: string;
+  totalDue !: number;
+}
 export class Reservation{
   id !: number;
   reservationDate !: Date;
   status !: string;
 }
 
+export class LoanRequest {
+  id !: number;
+  loanDate !: Date;
+  returnDate !: Date;
+  status !: string;
+  totalDue !: number;
+  student !: Student;
+}

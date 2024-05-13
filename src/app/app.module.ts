@@ -27,8 +27,11 @@ import { ViewReservationComponent } from './reservation/view-reservation/view-re
 import { CreateReservationComponent } from './reservation/create-reservation/create-reservation.component';
 import { ViewStudentComponent } from './student/view-student/view-student.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { TreeTableModule } from 'primeng/treetable';
 import { ViewBookComponent } from './book/view-book/view-book.component';
 import { CreateBookComponent } from './book/create-book/create-book.component';
+
+
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { CreateBookComponent } from './book/create-book/create-book.component';
     BrowserModule,
     AppRoutingModule,
     CommonModule,
+    TreeTableModule,
     ReactiveFormsModule,
     ButtonModule,
     InputTextModule,
@@ -62,8 +66,11 @@ import { CreateBookComponent } from './book/create-book/create-book.component';
     BrowserAnimationsModule,
     DropdownModule,
     ToastModule
+    
   ],
-  providers: [MessageService],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

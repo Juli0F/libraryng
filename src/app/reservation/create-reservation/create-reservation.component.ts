@@ -30,7 +30,6 @@ export class CreateReservationComponent implements OnInit {
         status: this.reservationToEdit.status,
       });
     } else {
-      // Resetear el formulario con valores por defecto cuando no hay reserva a editar
       this.reservationForm.reset({
         id: 0,
         reservationDate: '',
@@ -40,7 +39,7 @@ export class CreateReservationComponent implements OnInit {
   }
 
   onSubmit() {
-    const formValue = this.reservationForm.getRawValue(); // Incluye valores deshabilitados
+    const formValue = this.reservationForm.getRawValue(); 
 
     let updatedReservation = new Reservation();
 

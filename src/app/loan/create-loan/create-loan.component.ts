@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Loan } from 'src/models/models';
+import { MessageService } from 'primeng/api';
+import { Loan, LoanRequest, Student } from 'src/models/models';
 import { LoanService } from 'src/service/loan.service';
+import { StudentService } from 'src/service/student.service';
 
 @Component({
   selector: 'app-create-loan',
@@ -11,27 +13,35 @@ import { LoanService } from 'src/service/loan.service';
 export class CreateLoanComponent implements OnInit {
 
   @Output() onCreated = new EventEmitter<boolean>();
-  @Input() loanToEdit!: Loan | null;
+  @Input() loanToEdit!: LoanRequest | null;
   editId!: number;
+  students!: Student[];
+  student !: Student;
 
   loanForm = new FormGroup({
-    id: new FormControl(0), // Asumimos que el ID es numérico y lo inicializamos como 0
+    id: new FormControl(0), 
+    student: new FormControl(Student, Validators.required),
     loanDate: new FormControl('', Validators.required),
     returnDate: new FormControl('', Validators.required),
     status: new FormControl('', Validators.required),
-    totalDue: new FormControl(0, [Validators.required, Validators.min(0)]) // Total due también es numérico
+    totalDue: new FormControl(0, [Validators.required, Validators.min(0)]) 
   });
 
-  constructor(private loanService: LoanService) {}
+  constructor(private loanService: LoanService,
+    private studentService: StudentService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.loanForm.reset({
-      id: 0, // Inicializamos como 0 para evitar problemas de tipo
+      id: 0, 
       loanDate: '',
       returnDate: '',
       status: '',
-      totalDue: 0
+      totalDue: 0,
+      student: undefined
     });
+    this.getStudentLoan();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -41,7 +51,8 @@ export class CreateLoanComponent implements OnInit {
         loanDate: this.loanToEdit.loanDate.toISOString().substring(0, 10), 
         returnDate: this.loanToEdit.returnDate.toISOString().substring(0, 10),
         status: this.loanToEdit.status,
-        totalDue: this.loanToEdit.totalDue
+        totalDue: this.loanToEdit.totalDue,
+        student: undefined
       });
       this.editId = this.loanToEdit.id;
       this.loanForm.get('id')?.disable(); 
@@ -77,6 +88,7 @@ export class CreateLoanComponent implements OnInit {
       },
       error: (err) => {
         console.log("Error al crear el préstamo:", err);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error});
       }
     });
   }
@@ -87,10 +99,29 @@ export class CreateLoanComponent implements OnInit {
         console.log(data);
         this.onCreated.emit(true);
         this.loanForm.reset();
+        this.messageService.add({severity:'success',summary:'success',detail:"Prestamo editado correctamente"});
       },
       error: (err) => {
         console.log("Error al editar el préstamo:", err);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error});
       }
     });
   }
+  getStudentLoan() {
+    this.studentService.getAllStudents().subscribe({
+      next: data => {
+        this.students = data;
+        console.log("all student",data)
+        if (this.loanToEdit && this.loanToEdit.student) {
+      // this.loanForm.get('student').setValue(this.loanToEdit.student);
+        }
+      },
+      error: e => {
+        this.messageService.add({severity:'error', summary:'Error', detail:e.error});
+      }
+    });
+  }
+
+  
+  
 }

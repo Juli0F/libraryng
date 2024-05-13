@@ -2,30 +2,36 @@
     <form [formGroup]="loanForm" (ngSubmit)="onSubmit()" class="p-fluid">
       <div class="p-grid">
         <div class="p-col-6">
-          <span class="p-float-label">
-            <input id="loanDate" type="date" pInputText formControlName="loanDate">
+          <span class="p-label">
+            <label for="estudiante">Estudiante</label>
+            <p-dropdown [options]="students" formControlName="student" optionLabel="label" placeholder="Select a student"></p-dropdown>
+          </span>
+        </div>
+        <div class="p-col-6">
+          <span class="p-label">
             <label for="loanDate">Loan Date</label>
+            <input id="loanDate" type="date" pInputText formControlName="loanDate">
           </span>
         </div>
         <br>
         <div class="p-col-6">
-          <span class="p-float-label">
-            <input id="returnDate" type="date" pInputText formControlName="returnDate">
+          <span class="p-label">
             <label for="returnDate">Return Date</label>
+            <input id="returnDate" type="date" pInputText formControlName="returnDate">
           </span>
         </div>
         <br>
         <div class="p-col-6">
-          <span class="p-float-label">
-            <input id="totalDue" type="number" pInputText formControlName="totalDue">
+          <span class="p-label">
             <label for="totalDue">Total Due</label>
+            <input id="totalDue" type="number" pInputText formControlName="totalDue">
           </span>
         </div>
         <br>
         <div class="p-col-6">
-          <span class="p-float-label">
-            <input id="status" type="text" pInputText formControlName="status">
+          <span class="p-label">
             <label for="status">Status</label>
+            <input id="status" type="text" pInputText formControlName="status">
           </span>
         </div>
       </div>

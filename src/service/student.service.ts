@@ -31,6 +31,9 @@ export class StudentService {
   getAllStudents(){
     return this.http.get<Student[]>(`${this.apiUrl}`);
   }
+  getAllStudentsEntity(){
+    return this.http.get<Student[]>(`${this.apiUrl}/entities`);
+  }
   deleteStudent(carnet: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${carnet}`);
   }

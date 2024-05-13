@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Loan } from 'src/models/models';
+import { Loan, LoanResponseDto } from 'src/models/models';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class LoanService {
   }
   //--
   getAllLoans(){
-    return this.http.get<Loan[]>(`${this.apiUrl}`);
+    return this.http.get<LoanResponseDto[]>(`${this.apiUrl}`);
   }
   softDeleteLoan(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);

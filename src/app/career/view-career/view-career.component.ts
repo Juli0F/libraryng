@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Career } from 'src/models/models';
 import { CareerService } from 'src/service/career.service';
 
@@ -13,7 +14,9 @@ export class ViewCareerComponent implements OnInit {
   totalRecords = 10
   displayModal: boolean = false;
   editCareerItem: Career | null = null;
-  constructor(private careerService : CareerService) { }
+  constructor(private careerService : CareerService,
+    private messageService : MessageService
+  ) { }
   ngOnInit(): void {
     this.getAllCareer();
   }
@@ -28,7 +31,7 @@ export class ViewCareerComponent implements OnInit {
         this.getAllCareer();
       },
       error: (err) => {
-        console.log(err);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error});
       }
     })
   }

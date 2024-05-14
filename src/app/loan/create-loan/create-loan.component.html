@@ -4,7 +4,13 @@
         <div class="p-col-6">
           <span class="p-label">
             <label for="estudiante">Estudiante</label>
-            <p-dropdown [options]="students" formControlName="student" optionLabel="label" placeholder="Select a student"></p-dropdown>
+            <p-dropdown [options]="students" formControlName="carnet" optionLabel="carnet" placeholder="Select a student"></p-dropdown>
+          </span>
+        </div>
+        <div class="p-col-6">
+          <span class="p-label">
+            <label for="estudiante">libro</label>
+            <p-dropdown [options]="books" formControlName="bookCode" optionLabel="displayLabel" placeholder="Select a book"></p-dropdown>
           </span>
         </div>
         <div class="p-col-6">
@@ -31,12 +37,19 @@
         <div class="p-col-6">
           <span class="p-label">
             <label for="status">Status</label>
-            <input id="status" type="text" pInputText formControlName="status">
+            <p-dropdown 
+              [options]="statusOptions" 
+              formControlName="status"
+              optionLabel="label"
+              placeholder="Select a status"
+              inputId="status">
+            </p-dropdown>
           </span>
         </div>
+        
       </div>
       <br>
       <button type="submit" pButton label="Submit" [disabled]="!loanForm.valid"></button>
     </form>
   </p-card>
-  
+  <p-toast position="bottom-right"></p-toast>

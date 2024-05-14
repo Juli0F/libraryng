@@ -59,7 +59,7 @@ export class CreateStudentComponent implements OnInit {
   loadCareers() {
     this.careerService.getAllCareer().subscribe(data => {
       this.careers = data;
-      console.log("data",this.careers)
+      
     });
   }
 
@@ -81,12 +81,10 @@ export class CreateStudentComponent implements OnInit {
   create(student:StudentDto){
     this.studentService.createStudent(student).subscribe({
       next: data => {
-        console.log(data);
         this.onCreated.emit(true);
         this.studentForm.reset();
         this.messageService.add({severity:'success',summary:'success',detail:"Estudiante almacenado correctamente"});
       }, error : e => {
-        console.log("error", e)
         this.messageService.add({severity:'error',summary:'Error',detail:e.error});
       }
     })
@@ -95,9 +93,9 @@ export class CreateStudentComponent implements OnInit {
   edit(student:StudentDto){ 
     this.studentService.updateStudent(this.carnet,student).subscribe({
       next: data => {
-        console.log(data);
         this.onCreated.emit(true);
         this.studentForm.reset();
+        this.messageService.add({severity:'success',summary:'success',detail:"Estudiante actualizado correctamente"});
       }, error : e => {
         this.messageService.add({severity:'error',summary:'Error',detail:e.error});
       }

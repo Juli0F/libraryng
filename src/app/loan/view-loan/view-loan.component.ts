@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Loan, LoanRequest } from 'src/models/models';
+import { Loan, LoanRequest, LoanResponseDto } from 'src/models/models';
 import { LoanService } from 'src/service/loan.service';
 import { StudentService } from 'src/service/student.service';
-import { TreeNode } from 'primeng/api';
+import { MessageService, TreeNode } from 'primeng/api';
 
 @Component({
   selector: 'app-view-loan',
@@ -14,9 +14,11 @@ export class ViewLoanComponent implements OnInit {
   loanList!: Loan[];
   totalRecords = 10;
   displayModal: boolean = false;
-  editLoanItem: LoanRequest | null = null;
+  editLoanItem: LoanResponseDto | null = null;
 
-  constructor(private loanService: LoanService) { }
+  constructor(private loanService: LoanService,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.getAllLoans();
@@ -34,13 +36,13 @@ export class ViewLoanComponent implements OnInit {
         this.getAllLoans();
       },
       error: (err) => {
-        console.log(err);
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error});
       }
     });
   }
 
-  showDialog(loanToEdit?: LoanRequest) {
-    this.editLoanItem = loanToEdit || null;
+  showDialog(loanToEdit?: LoanResponseDto) {
+    this.editLoanItem = loanToEdit || null ;
     this.displayModal = true;
   }
 

@@ -1,5 +1,5 @@
 <div class="grid">
-    <div class="col-12 md:col-8 md:col-offset-2">
+    <div class="col-12 md:col-10 md:col-offset-1">
       <p-card>
         <div class="formgrid grid">
           <div class="field col">
@@ -16,7 +16,9 @@
         <p-table [value]="loanList" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,20,30]">
           <ng-template pTemplate="header">
             <tr>
-              <th>ID</th>
+              <th>Prestamo</th>
+              <th>Estudiante</th>
+              <th>Codigo Libro</th>
               <th>Fecha de préstamo</th>
               <th>Fecha de retorno</th>
               <th>Status</th>
@@ -27,6 +29,8 @@
           <ng-template pTemplate="body" let-item>
             <tr>
               <td>{{ item.id }}</td>
+              <td>{{ item.carnet }}</td>
+              <td>{{ item.bookCode }}</td>
               <td>{{ item.loanDate | date:'mediumDate' }}</td>
               <td>{{ item.returnDate | date:'mediumDate' }}</td>
               <td>{{ item.status }}</td>

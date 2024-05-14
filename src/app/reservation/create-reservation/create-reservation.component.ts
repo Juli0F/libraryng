@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Reservation } from 'src/models/models';
 import { ReservationService } from 'src/service/reservation.service';
 
@@ -18,7 +19,9 @@ export class CreateReservationComponent implements OnInit {
     status: new FormControl('', Validators.required),
   });
 
-  constructor(private reservationService: ReservationService) {}
+  constructor(private reservationService: ReservationService,
+    private messageService : MessageService
+  ) {}
 
   ngOnInit(): void {
     if (this.reservationToEdit) {
@@ -57,9 +60,10 @@ export class CreateReservationComponent implements OnInit {
     this.reservationService.createReservation(reservation).subscribe({
       next: () => {
         this.onCreated.emit(true);
+        this.messageService.add({severity:'success',summary:'success',detail:"Reservacion guardada correctamente"});
       },
       error: (err) => {
-        console.log('Error');
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error});
       },
     });
   }

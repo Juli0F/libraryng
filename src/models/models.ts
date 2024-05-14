@@ -37,11 +37,12 @@ export class Loan {
 }
 export class LoanResponseDto{
   id !: number;
-  name !: string;
+  carnet !: string;
   loanDate !: Date;
   returnDate !: Date;
   status !: string;
   totalDue !: number;
+  bookCode !: string;
 }
 export class Reservation{
   id !: number;
@@ -55,5 +56,6 @@ export class LoanRequest {
   returnDate !: Date;
   status !: string;
   totalDue !: number;
-  student !: Student;
+  carnet !: String;
+  bookCode !: String;
 }

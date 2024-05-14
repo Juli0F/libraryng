@@ -67,7 +67,6 @@ export class CreateBookComponent implements OnInit {
        this.bookForm.reset(); 
        this.messageService.add({severity:'success',summary:'success',detail:"Libro actualizado correctamente"});
       },error: e => {
-        console.log("error",e)
         this.messageService.add({severity:'error',summary:'Error',detail:e.error});
       }
     })

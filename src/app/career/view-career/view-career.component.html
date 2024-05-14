@@ -2,7 +2,7 @@
 <br>
 
 <div class="grid">
-  <div class="col-12 md:col-6 md:col-offset-3">
+  <div class="col-10 md:col-5 md:col-offset-3">
 <p-card>
 <div class="formgrid grid">
     <div class="field col">
@@ -31,8 +31,8 @@
         <td>{{ item.code }}</td>
         <td>{{ item.name }}</td>
         <td>
-          <button pButton type="button" icon="pi pi-pencil" label="Editar" class="p-button-warning" pTooltip="Editar" tooltipPosition="top" (click)="showDialog(item)"></button>
-          <button pButton type="button" icon="pi pi-trash" label="Eliminar" class="p-button-danger" pTooltip="Eliminar" tooltipPosition="top" (click)="softDelete(item.code)"></button>
+          <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success" pTooltip="Editar" tooltipPosition="top" (click)="showDialog(item)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-rounded p-button-warning" pTooltip="Eliminar" tooltipPosition="top" (click)="softDelete(item.code)"></button>
         </td>
       </tr>
     </ng-template>

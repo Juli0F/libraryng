@@ -66,7 +66,6 @@ export class CreateCareerComponent implements OnInit  {
         this.messageService.add({severity:'success',summary:'success',detail:"Carrera almacenada correctamente"});
       },
       error: (err) => {
-        console.log("error");
         this.messageService.add({severity:'error',summary:'Error',detail:err.error});
       }
 
@@ -75,7 +74,6 @@ export class CreateCareerComponent implements OnInit  {
   edit(career:Career) {
     this.careerService.updateCareer(this.editCode,career).subscribe({
       next: (data) => {
-        console.log(data);
         this.onCreated.emit(true);
         this.careerForm.reset();
         this.messageService.add({severity:'success',summary:'success',detail:"Carrera almacenada correctamente"});

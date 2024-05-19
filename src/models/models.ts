@@ -59,3 +59,10 @@ export class LoanRequest {
   carnet !: String;
   bookCode !: String;
 }
+export class ReservationRequestDto {
+  id !: number;
+  reservationDate !: Date;
+  status !: string;
+  carnet !: String;
+  bookCode !: String;
+}

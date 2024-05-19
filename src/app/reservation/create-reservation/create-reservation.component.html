@@ -1,14 +1,40 @@
 <p-card>
-    <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="p-fluid">
-      <div class="p-field">
-        <label for="reservationDate">Fecha de Reserva</label>
-        <input type="date" pInputText formControlName="reservationDate">
+  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="p-fluid">
+    <div class="p-grid">
+      <div class="p-col-6">
+        <span class="p-label">
+          <label for="estudiante">Estudiante</label>
+          <p-dropdown [options]="students" formControlName="carnet" optionLabel="carnet" placeholder="Select a student"></p-dropdown>
+        </span>
       </div>
-      <div class="p-field">
-        <label for="status">Estado</label>
-        <input type="text" pInputText formControlName="status">
+      <div class="p-col-6">
+        <span class="p-label">
+          <label for="estudiante">libro</label>
+          <p-dropdown [options]="books" formControlName="bookCode" optionLabel="displayLabel" placeholder="Select a book"></p-dropdown>
+        </span>
       </div>
-      <button type="submit" pButton label="Guardar" [disabled]="!reservationForm.valid"></button>
-    </form>
-  </p-card>
-  
+      <div class="p-col-6">
+        <span class="p-label">
+          <label for="reservationDate">Reservation Date</label>
+          <input id="reservationDate" type="date" pInputText formControlName="reservationDate">
+        </span>
+      </div>
+      <div class="p-col-6">
+        <span class="p-label">
+          <label for="status">Status</label>
+          <p-dropdown 
+            [options]="statusOptions" 
+            formControlName="status"
+            optionLabel="label"
+            placeholder="Select a status"
+            inputId="status">
+          </p-dropdown>
+        </span>
+      </div>
+      
+    </div>
+    <br>
+    <button type="submit" pButton label="Submit" [disabled]="!reservationForm.valid"></button>
+  </form>
+</p-card>
+<p-toast position="bottom-right"></p-toast>

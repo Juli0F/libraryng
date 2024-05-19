@@ -31,7 +31,7 @@ export class ReservationService {
   getAllReservations() {
     return this.http.get<Reservation[]>(`${this.apiUrl}`);
   }
-  deleteReservation(id:number){
+  softDeleteReservation(id:number){
     return this.http.delete<Reservation>(`${this.apiUrl}/${id}`, {});
   }
 }

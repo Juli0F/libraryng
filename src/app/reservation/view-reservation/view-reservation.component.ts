@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Reservation } from 'src/models/models';
+import { MessageService } from 'primeng/api';
+import { Reservation, ReservationRequestDto } from 'src/models/models';
 import { ReservationService } from 'src/service/reservation.service';
 
 @Component({
@@ -9,37 +10,47 @@ import { ReservationService } from 'src/service/reservation.service';
 })
 export class ViewReservationComponent implements OnInit {
   reservationList!: Reservation[];
+  totalRecords = 10;
   displayModal: boolean = false;
-  editReservationItem: Reservation | null = null;
+  editReservationItem: ReservationRequestDto | null = null;
 
-  constructor(private reservationService: ReservationService) {}
+  constructor(private reservationService: ReservationService,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
-    this.loadReservations();
+    this.getAllReservations();
   }
 
-  loadReservations() {
+  getAllReservations() {
     this.reservationService.getAllReservations().subscribe(data => {
       this.reservationList = data;
     });
   }
 
-  deleteReservation(id: number) {
-    this.reservationService.deleteReservation(id).subscribe(() => this.loadReservations());
+  softDelete(id: number) {
+    this.reservationService.softDeleteReservation(id).subscribe({
+      next: () => {
+        this.getAllReservations();
+      },
+      error: (err) => {
+        this.messageService.add({severity:'error',summary:'Error',detail:err.error});
+      }
+    });
   }
 
-  showDialog(reservation?: Reservation) {
-    this.editReservationItem = reservation || null;
+  showDialog(reservationToEdit?: ReservationRequestDto) {
+    this.editReservationItem = reservationToEdit || null ;
     this.displayModal = true;
   }
 
   closeModal() {
     this.displayModal = false;
-    this.loadReservations();
   }
 
   closeModalAndReloadList() {
-    this.displayModal = false;
-    this.loadReservations();
+    this.editReservationItem = null;
+    this.closeModal();
+    this.getAllReservations();
   }
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { JwtService } from './auth/pages/jwt.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'libraryng';
+  jwtService: JwtService = inject(JwtService);
+  username:string = this.jwtService.getClaim('user');
 }

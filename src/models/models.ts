@@ -66,3 +66,18 @@ export class ReservationRequestDto {
   carnet !: String;
   bookCode !: String;
 }
+
+export class Credentials {
+  username!: string;
+  password!: string;
+}
+
+export class User {
+  userId!: number;
+  name!: string;
+  username!: string;
+  password!: string;
+  email!: string;
+  role!: string;
+  status!: boolean;
+}

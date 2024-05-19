@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from '../auth/pages/auth.service';
+import { JwtService } from '../auth/pages/jwt.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +9,15 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
+  showNavbar: boolean = false;
+  authService: AuthService = inject(AuthService);
+  jwtService: JwtService = inject(JwtService);
   items: MenuItem[] | undefined ;
-
+  username:string = this.jwtService.getClaim('user');
 
   ngOnInit(): void {
-    this.items = this.MenuItemFactory;
+    if(this.username)
+      this.items = this.MenuItemFactory;
   }
 
   MenuItemFactory = [

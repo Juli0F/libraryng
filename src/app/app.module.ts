@@ -30,7 +30,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TreeTableModule } from 'primeng/treetable';
 import { ViewBookComponent } from './book/view-book/view-book.component';
 import { CreateBookComponent } from './book/create-book/create-book.component';
-
+import { LoginComponent } from './auth/pages/login/login.component';
+import {PasswordModule} from "primeng/password";
+import { InputValidationComponent } from './commons/components/input-validation/input-validation.component';
+import { ManagerHomepageComponent } from './commons/components/manager-homepage/manager-homepage.component';
 
 
 @NgModule({
@@ -48,6 +51,8 @@ import { CreateBookComponent } from './book/create-book/create-book.component';
     ViewStudentComponent,
     ViewBookComponent,
     CreateBookComponent,
+    LoginComponent,
+    ManagerHomepageComponent
   ],
   imports: [
     BrowserModule,
@@ -65,8 +70,14 @@ import { CreateBookComponent } from './book/create-book/create-book.component';
     DialogModule,
     BrowserAnimationsModule,
     DropdownModule,
-    ToastModule
+    ToastModule,
+    PasswordModule,
     
+    InputValidationComponent,
+    FormsModule,  
+    PasswordModule,
+    ButtonModule,
+    ToastModule
   ],
   providers: [
     MessageService

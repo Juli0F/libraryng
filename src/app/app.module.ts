@@ -11,7 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ViewCareerComponent } from './career/view-career/view-career.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MenubarModule} from 'primeng/menubar';
@@ -34,6 +34,7 @@ import { LoginComponent } from './auth/pages/login/login.component';
 import {PasswordModule} from "primeng/password";
 import { InputValidationComponent } from './commons/components/input-validation/input-validation.component';
 import { ManagerHomepageComponent } from './commons/components/manager-homepage/manager-homepage.component';
+import { AuthInterceptor } from './auth/pages/auth.interceptor';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { ManagerHomepageComponent } from './commons/components/manager-homepage/
     ToastModule
   ],
   providers: [
-    MessageService
+    MessageService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

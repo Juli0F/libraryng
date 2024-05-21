@@ -2,7 +2,7 @@ name: CD to AWS S3
 
 on:
   push:
-    branches: [master]
+    branches: [develop]
 
 jobs:
   build:

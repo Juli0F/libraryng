@@ -3,7 +3,7 @@ name: Angular
 on:
   push:
     branches:
-      - main  
+      - develop  
 
 jobs:
   build-and-deploy:
@@ -27,11 +27,7 @@ jobs:
         run: |
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
-          if [ -d "/usr/local/aws-cli" ]; then
-            sudo ./aws/install --update
-          else
-            sudo ./aws/install
-          fi
+          sudo ./aws/install --update
 
       - name: Deploy to S3
         env:

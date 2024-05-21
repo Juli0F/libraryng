@@ -91,6 +91,7 @@ export class CreateStudentComponent implements OnInit {
   }
 
   edit(student:StudentDto){ 
+    student.carnet = this.carnet;
     this.studentService.updateStudent(this.carnet,student).subscribe({
       next: data => {
         this.onCreated.emit(true);

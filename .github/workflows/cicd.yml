@@ -52,4 +52,4 @@ jobs:
 
       - name: Deploy to S3 bucket
         run: |
-          aws s3 cp --recursive  dist s3://angular-bucket-ayd
+          aws s3 cp --recursive  --region us-east-2  dist s3://angular-bucket-ayd

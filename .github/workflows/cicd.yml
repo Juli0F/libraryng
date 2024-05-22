@@ -53,6 +53,8 @@ jobs:
         run: |
             pwd
             ls -al
+            cd libraryng
+            ls -la
       - name: Deploy to S3 bucket
         run: |
-          aws s3 cp --recursive  --region us-east-2  ${{ github.workspace }}/dist s3://angular-bucket-ayd
+          aws s3 cp --recursive  --region us-east-2  /home/runner/work/libraryng/libraryng/dist s3://angular-bucket-ayd
